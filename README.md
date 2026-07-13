@@ -10,11 +10,19 @@ Twelve months of data, four scraping snapshots per city, thirteen cities: Amster
 
 ## Counting listings is the wrong way to look at this
 
-London has **93,073** listings and Paris has **87,518** — the two biggest markets by a distance. Read the raw counts and you'd conclude London has the bigger Airbnb problem.
+London has **93,073** listings and Paris has **87,518** — the two biggest markets by a distance. Venice sits near the bottom of the table. Read the raw counts and you'd conclude Venice barely has an Airbnb problem at all.
 
-It doesn't. London has 8.8 million residents; Paris has 2.1 million. Per thousand inhabitants, **Paris has four times London's density.**
+![Total listings per city, active vs inactive](images/listings-per-city.png)
 
-And density itself isn't the end of it. A listing that hasn't been booked in twelve months isn't affecting anyone's rent. So I split it: total listings per 1,000 residents, and — separating out the dormant ones — **active** listings per 1,000 residents.
+It has the worst one in Europe.
+
+London has 8.8 million residents. Venice has 250,000. Divide by the population that actually lives there, and the chart turns inside out:
+
+![Listings per 1,000 inhabitants, active vs inactive](images/density-per-1000.png)
+
+Venice goes from second-from-last to second place. London falls to mid-table.
+
+And density alone still isn't the end of it. A listing that hasn't been booked in twelve months isn't taking a home off anyone's market. So both charts split each bar: **active** listings in dark, **dormant** ones in pale — and the dark bars are the ones that matter.
 
 | City | Listings / 1,000 residents | **Active** / 1,000 | Dormant |
 | --- | --- | --- | --- |
@@ -32,7 +40,7 @@ And density itself isn't the end of it. A listing that hasn't been booked in twe
 | Dublin | 5.1 | 3.4 | 33% |
 | **Berlin** | **3.7** | **1.9** | 50% |
 
-**The ranking flips.** Paris leads on paper with 41 listings per 1,000 residents — but **half of them are dormant**. Venice's are not. Once you count only listings that actually get booked, **Venice comes first**: 25.6 active Airbnbs per 1,000 residents, or **one active Airbnb for every 39 people who live there.**
+**The ranking flips again.** Paris leads on paper with 41 listings per 1,000 residents — but **half of them are dormant**. Venice's are not. Look back at the second chart: Paris has the longest bar, but Venice has the longest *dark* one. Counting only listings that actually get booked, **Venice comes first**: 25.6 active Airbnbs per 1,000 residents, or **one active Airbnb for every 39 people who live there.**
 
 **And Berlin is the outlier at the other end** — 1.9 active listings per 1,000, *thirteen times* below Venice, in a city with a well-known and aggressively enforced short-let regime. Whatever you think of the policy, the data says it worked.
 
@@ -113,6 +121,8 @@ Most of the work in this analysis wasn't the statistics. It was four judgement c
 The notebook closes by rebuilding Inside Airbnb's own city dashboards in **Vega-Altair**, driven by a city dropdown: room types, booking recency, licence status, minimum-nights distribution, and listings per host.
 
 The licence chart is the one worth looking at — it's the clearest single view of which cities enforce short-let registration and which don't.
+
+> **These five charts do not render on GitHub.** Altair emits Vega-Lite as JavaScript, and GitHub's notebook viewer strips JavaScript for security — so they show up blank here, no matter how the notebook was saved. To see them, open the notebook locally (or in [nbviewer](https://nbviewer.org/)) and run the cells. The two static charts above are matplotlib, which is why they survive.
 
 ## Running it
 
