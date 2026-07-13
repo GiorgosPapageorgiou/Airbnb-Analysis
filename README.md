@@ -8,6 +8,22 @@ Twelve months of data, four scraping snapshots per city, thirteen cities: Amster
 
 ---
 
+## The five questions
+
+The assignment set five tasks. This README is organised around what the answers *turned out to be*, so here is the original brief, and where each one is answered.
+
+| | The question | Answered in |
+| --- | --- | --- |
+| **1** | Find the number of listings per city. Tabulate it and plot it. | [Counting listings](#counting-listings-is-the-wrong-way-to-look-at-this) |
+| **2** | Find the **density** — listings per 1,000 inhabitants. *Determine the number of inhabitants per city in the most appropriate way.* Tabulate and plot. | [Counting listings](#counting-listings-is-the-wrong-way-to-look-at-this) · [Methodology](#methodology-decisions-that-actually-mattered) |
+| **3** | Find bookings and **income per listing**. Assume **half of bookings leave a review**, and each booking is **three nights**. Income = price × bookings. | [What a listing earns](#what-a-listing-earns) |
+| **4** | Find **total** bookings and nights per city. **Compare against publicly available data.** Explain how you sourced it, the methodology behind its collection, and your **assessment of its quality**. Discuss the differences. | [Checking the numbers](#checking-the-numbers-against-someone-elses) |
+| **5** | **Replicate** Inside Airbnb's own city visualisations, and make them **interactive** — a dropdown to switch city. | [The interactive piece](#the-interactive-piece) |
+
+Two of these carry more weight than they look. Task 2's *"in the most appropriate way"* is the whole of the density problem hiding in a subordinate clause — get the denominator wrong and every number is wrong. And Task 4 doesn't ask you to be right; it asks you to find out **why you disagree** with someone else, which is a harder and more useful question.
+
+---
+
 ## Counting listings is the wrong way to look at this
 
 London has **93,073** listings and Paris has **87,518** — the two biggest markets by a distance. Venice sits near the bottom of the table. Read the raw counts and you'd conclude Venice barely has an Airbnb problem at all.
@@ -88,11 +104,15 @@ Venice tops this table too — it is both the densest active market *and* the mo
 
 ## Checking the numbers against someone else's
 
-Estimating bookings from review counts is a modelling assumption, and modelling assumptions deserve to be checked against an independent source. I compared my totals to **[AirDNA](https://www.airdna.co/)**, a commercial short-term-rental analytics provider, deriving their bookings as `occupancy rate × active listings × 365 ÷ 3`.
+Task 4 asks for the total bookings and nights per city, and then — the interesting half — to compare them against public data and **explain the difference**.
+
+Bookings here are not observed. They're inferred from review counts, using the assumption the assignment hands you: **half of all bookings leave a review, and every booking is three nights.** So `bookings = 2 × reviews`. That assumption is the load-bearing wall of the whole estimate, and the point of Task 4 is to go and find out whether it holds.
+
+I compared my totals against **[AirDNA](https://www.airdna.co/)**, a commercial short-term-rental analytics provider, deriving their bookings as `occupancy rate × active listings × 365 ÷ 3`.
 
 My numbers came out **lower than AirDNA's in 11 of the 13 cities** — London by 44%, Paris by 36%.
 
-A gap that large has to come from somewhere, and there are only two candidates: we disagree about how many listings are active, or we disagree about how often they're booked. So I checked the first one:
+A gap that large has to come from somewhere, and there are only two candidates: we disagree about **how many listings are active**, or we disagree about **how often they're booked**. Those are separable, so I checked the first one:
 
 | | My active listings | AirDNA | Gap |
 | --- | --- | --- | --- |
@@ -100,9 +120,11 @@ A gap that large has to come from somewhere, and there are only two candidates: 
 | Barcelona | 11,438 | 12,050 | 5% |
 | Berlin | 6,772 | 7,188 | 6% |
 
-The listing counts agree — Paris to within fifteen listings out of forty-five thousand. **So the entire divergence is in the occupancy assumption**, and it isolates cleanly to my rule that *one booking ≈ two reviews*.
+The listing counts agree — Paris to within **fifteen listings out of forty-five thousand**. The denominators are not the problem. **So the entire divergence sits in the occupancy assumption**, and it isolates cleanly to that prescribed `2 × reviews` rule.
 
-That rule is deliberately conservative — it assumes only half of stays leave a review. Either AirDNA's occupancy rates are optimistic, or my review-to-booking ratio is too cautious. My numbers are a floor, not an estimate, and the README should say so rather than pretend otherwise.
+Which means: **these figures are a floor, not an estimate.** If fewer than half of stays actually leave a review — and the AirDNA comparison suggests they do — then real bookings are higher than everything reported here, systematically, in every city.
+
+That is the honest answer to Task 4, and it's a better one than agreeing with AirDNA would have been. The value of the cross-check isn't that it validates the numbers; it's that it identifies *precisely which assumption* they're hostage to.
 
 ## Methodology decisions that actually mattered
 
